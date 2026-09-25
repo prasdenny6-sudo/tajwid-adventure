@@ -1,1922 +1,2422 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Tajwid Adventure</title>
+<title>Tajwid Adventure - PP Mardhotullah Al Islamy</title>
 
 <style>
-
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-
-margin:0;
-
-font-family:Arial,sans-serif;
-
-background:
-linear-gradient(
-135deg,
-#064e3b,
-#10b981
-);
-
-min-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-padding:15px;
-
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#064e3b,#047857,#10b981);
+    min-height:100vh;
+    color:#123;
 }
 
-.game{
-
-width:100%;
-
-max-width:680px;
-
-background:white;
-
-border-radius:28px;
-
-padding:25px;
-
-box-shadow:
-0 20px 50px
-rgba(0,0,0,.25);
-
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
 }
 
-.logo{
-
-text-align:center;
-
-font-size:55px;
-
-}
-
-h1{
-
-text-align:center;
-
-color:#065f46;
-
-margin:5px 0;
-
-}
-
-.subtitle{
-
-text-align:center;
-
-color:#666;
-
-margin-bottom:20px;
-
-}
-
-.stats{
-
-display:flex;
-
-justify-content:space-between;
-
-background:#ecfdf5;
-
-padding:14px;
-
-border-radius:15px;
-
-font-weight:bold;
-
-margin-bottom:20px;
-
-}
-
-input{
-
-width:100%;
-
-padding:15px;
-
-border:2px solid #d1fae5;
-
-border-radius:14px;
-
-font-size:16px;
-
-margin-bottom:15px;
-
-outline:none;
-
-}
-
-input:focus{
-
-border-color:#10b981;
-
-}
-
-.level-grid{
-
-display:grid;
-
-gap:15px;
-
-}
-
-.level-card{
-
-border:2px solid #d1fae5;
-
-border-radius:18px;
-
-padding:20px;
-
-background:#f0fdf4;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.level-card:hover{
-
-transform:translateY(-3px);
-
-box-shadow:
-0 8px 20px
-rgba(0,0,0,.12);
-
-}
-
-.level-card.locked{
-
-background:#f3f4f6;
-
-border-color:#ddd;
-
-cursor:not-allowed;
-
-opacity:.7;
-
-}
-
-.level-title{
-
-font-size:20px;
-
-font-weight:bold;
-
-color:#065f46;
-
-}
-
-.level-info{
-
-color:#666;
-
-margin-top:7px;
-
-}
-
-.badge-icon{
-
-font-size:35px;
-
-float:right;
-
-}
-
-.main-btn{
-
-width:100%;
-
-background:#059669;
-
-color:white;
-
-border:none;
-
-padding:15px;
-
-border-radius:14px;
-
-font-size:17px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-margin-top:15px;
-
-}
-
-.main-btn:hover{
-
-background:#047857;
-
+.card{
+    background:white;
+    border-radius:24px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    margin-bottom:20px;
 }
 
 .hidden{
-
-display:none!important;
-
+    display:none !important;
 }
 
-.level-name{
+/* HEADER */
 
-background:#ecfdf5;
-
-padding:15px;
-
-border-radius:15px;
-
-margin-bottom:15px;
-
-font-weight:bold;
-
-color:#065f46;
-
+.header{
+    text-align:center;
+    color:white;
+    margin-bottom:20px;
 }
 
-.progress{
-
-height:10px;
-
-background:#ddd;
-
-border-radius:20px;
-
-overflow:hidden;
-
-margin:15px 0 25px;
-
+.header h1{
+    font-size:32px;
+    margin-bottom:8px;
 }
 
-.progress-bar{
+.header p{
+    opacity:.9;
+}
 
-height:100%;
+/* INPUT */
 
-background:#10b981;
+input{
+    width:100%;
+    padding:15px;
+    border:2px solid #d1d5db;
+    border-radius:14px;
+    font-size:16px;
+    margin:10px 0;
+    outline:none;
+}
 
-width:0%;
+input:focus{
+    border-color:#10b981;
+}
 
-transition:.3s;
+/* BUTTON */
 
+button{
+    border:none;
+    border-radius:14px;
+    padding:14px 20px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.btn-primary{
+    background:#059669;
+    color:white;
+    width:100%;
+}
+
+.btn-secondary{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.btn-warning{
+    background:#f59e0b;
+    color:white;
+}
+
+.btn-danger{
+    background:#dc2626;
+    color:white;
+}
+
+/* MENU */
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.level-card{
+    padding:22px;
+    border-radius:20px;
+    background:#ecfdf5;
+    border:2px solid #a7f3d0;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.level-card:hover{
+    transform:translateY(-3px);
+}
+
+.level-card.locked{
+    background:#f3f4f6;
+    border-color:#d1d5db;
+    opacity:.7;
+    cursor:not-allowed;
+}
+
+.level-card h3{
+    margin:8px 0;
+}
+
+.level-card p{
+    color:#4b5563;
+    font-size:14px;
+}
+
+.status{
+    margin-top:10px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:#ecfdf5;
+    padding:12px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:20px;
+    margin-top:5px;
+}
+
+/* QUESTION */
+
+.question-number{
+    color:#059669;
+    font-weight:bold;
+    margin-bottom:15px;
 }
 
 .arabic{
-
-font-size:42px;
-
-text-align:center;
-
-direction:rtl;
-
-line-height:1.8;
-
-margin:20px 0;
-
+    font-size:38px;
+    direction:rtl;
+    text-align:center;
+    padding:25px;
+    background:#f0fdf4;
+    border-radius:18px;
+    margin-bottom:20px;
+    line-height:1.8;
 }
 
-.question{
-
-text-align:center;
-
-font-size:18px;
-
-margin-bottom:20px;
-
+.question-text{
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:20px;
 }
 
 .answers{
-
-display:grid;
-
-gap:12px;
-
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-.answer{
-
-border:none;
-
-padding:15px;
-
-border-radius:13px;
-
-font-size:16px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-background:#f3f4f6;
-
+.answer-btn{
+    background:#f3f4f6;
+    color:#111827;
+    border:2px solid #e5e7eb;
 }
 
-.answer:hover{
-
-background:#d1fae5;
-
+.answer-btn:hover{
+    background:#ecfdf5;
+    border-color:#10b981;
 }
 
-.correct{
-
-background:#10b981!important;
-
-color:white!important;
-
+.answer-btn.correct{
+    background:#bbf7d0;
+    border-color:#16a34a;
 }
 
-.wrong{
-
-background:#ef4444!important;
-
-color:white!important;
-
+.answer-btn.wrong{
+    background:#fecaca;
+    border-color:#dc2626;
 }
+
+/* FEEDBACK */
 
 .feedback{
-
-text-align:center;
-
-min-height:60px;
-
-margin-top:15px;
-
-font-weight:bold;
-
-line-height:1.5;
-
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
 }
 
-.result{
-
-text-align:center;
-
+.feedback.correct{
+    background:#dcfce7;
+    color:#166534;
 }
 
-.big-badge{
-
-font-size:80px;
-
+.feedback.wrong{
+    background:#fee2e2;
+    color:#991b1b;
 }
 
-.score{
+/* RESULT */
 
-font-size:28px;
-
-font-weight:bold;
-
-color:#059669;
-
-margin:15px 0;
-
+.result-icon{
+    font-size:70px;
+    text-align:center;
+    margin-bottom:10px;
 }
+
+.result-title{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.result-stats{
+    background:#f0fdf4;
+    padding:20px;
+    border-radius:18px;
+    margin-bottom:20px;
+}
+
+.result-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #d1fae5;
+}
+
+.result-row:last-child{
+    border-bottom:none;
+}
+
+/* ACHIEVEMENTS */
+
+.achievement-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.achievement{
+    border-radius:18px;
+    padding:20px;
+    border:2px solid #d1d5db;
+    background:#f9fafb;
+}
+
+.achievement.unlocked{
+    background:#ecfdf5;
+    border-color:#10b981;
+}
+
+.achievement.locked{
+    opacity:.6;
+    filter:grayscale(.7);
+}
+
+.achievement-icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.achievement h3{
+    margin-bottom:7px;
+}
+
+.achievement p{
+    color:#4b5563;
+    font-size:14px;
+}
+
+.achievement-status{
+    margin-top:10px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+/* PROGRESS */
+
+.progress-bar{
+    width:100%;
+    height:12px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress-fill{
+    height:100%;
+    background:#10b981;
+    transition:.3s;
+}
+
+/* CERTIFICATE */
 
 .certificate{
-
-border:8px double #059669;
-
-padding:30px 20px;
-
-margin-top:20px;
-
-background:
-linear-gradient(
-135deg,
-#ecfdf5,
-#ffffff
-);
-
-text-align:center;
-
+    border:8px double #059669;
+    padding:40px 25px;
+    text-align:center;
+    background:#fff;
+    border-radius:10px;
 }
 
-.certificate h2{
-
-color:#065f46;
-
-font-size:30px;
-
-margin:10px 0;
-
+.certificate h1{
+    color:#047857;
+    font-size:32px;
+    margin:15px 0;
 }
 
-.certificate .student{
-
-font-size:30px;
-
-font-weight:bold;
-
-color:#111;
-
-margin:20px 0;
-
-}
-
-.certificate .cert-badge{
-
-font-size:70px;
-
+.certificate .name{
+    font-size:30px;
+    font-weight:bold;
+    margin:25px 0;
 }
 
 .certificate p{
-
-color:#555;
-
-line-height:1.6;
-
+    margin:10px 0;
 }
 
-.small{
-
-font-size:13px;
-
-color:#777;
-
+.certificate-badge{
+    font-size:60px;
+    margin:10px;
 }
 
-@media(max-width:500px){
+/* NAV */
 
-.game{
-
-padding:18px;
-
+.nav-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
 }
 
-.arabic{
-
-font-size:34px;
-
+.nav-buttons button{
+    flex:1;
 }
 
+/* NOTIFICATION */
+
+.toast{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%) translateY(-100px);
+    background:#064e3b;
+    color:white;
+    padding:15px 22px;
+    border-radius:15px;
+    z-index:9999;
+    transition:.3s;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+    text-align:center;
 }
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+}
+
+/* PRINT */
 
 @media print{
 
-body{
+    body{
+        background:white;
+    }
 
-background:white;
+    body *{
+        visibility:hidden;
+    }
 
-padding:0;
+    #certificateScreen,
+    #certificateScreen *{
+        visibility:visible;
+    }
 
+    #certificateScreen{
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+    }
+
+    .print-hide{
+        display:none !important;
+    }
 }
 
-.game{
+/* MOBILE */
 
-box-shadow:none;
+@media(max-width:650px){
 
-max-width:none;
+    .container{
+        padding:12px;
+    }
 
+    .header h1{
+        font-size:25px;
+    }
+
+    .card{
+        padding:18px;
+        border-radius:18px;
+    }
+
+    .menu-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .answers{
+        grid-template-columns:1fr;
+    }
+
+    .achievement-grid{
+        grid-template-columns:1fr;
+    }
+
+    .arabic{
+        font-size:30px;
+    }
+
+    .nav-buttons{
+        flex-direction:column;
+    }
 }
-
-body *{
-
-visibility:hidden;
-
-}
-
-#certificate,
-#certificate *{
-
-visibility:visible;
-
-}
-
-#certificate{
-
-position:absolute;
-
-left:0;
-
-top:0;
-
-width:100%;
-
-}
-
-.no-print{
-
-display:none!important;
-
-}
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
+<div id="toast" class="toast"></div>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+        <h1>📖 TAJWID ADVENTURE</h1>
+        <p>Media Pembelajaran Tajwid — PP Mardhotullah Al Islamy</p>
+    </div>
+
+
+    <!-- HOME -->
+
+    <div id="homeScreen" class="card">
+
+        <h2>🎮 Selamat Datang, Santri!</h2>
+
+        <p style="margin-top:10px;">
+            Masukkan nama untuk memulai petualangan belajar Tajwid.
+        </p>
+
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Masukkan nama santri..."
+        >
+
+        <button
+            class="btn-primary"
+            onclick="saveNameAndStart()"
+        >
+            🚀 MULAI PETUALANGAN
+        </button>
+
+        <div style="margin-top:25px;"></div>
+
+        <div class="stats">
+
+            <div class="stat">
+                ⭐ XP
+                <strong id="homeXP">0</strong>
+            </div>
+
+            <div class="stat">
+                🏆 Level
+                <strong id="homeLevel">1</strong>
+            </div>
+
+            <div class="stat">
+                🏅 Prestasi
+                <strong id="homeAchievement">0/6</strong>
+            </div>
+
+            <div class="stat">
+                📚 Selesai
+                <strong id="homeCompleted">0/3</strong>
+            </div>
+
+        </div>
+
+
+        <h2 style="margin-top:20px;">
+            🗺️ Pilih Level
+        </h2>
+
+        <div class="menu-grid">
+
+            <div
+                id="levelCard1"
+                class="level-card"
+                onclick="selectLevel(1)"
+            >
+                <div style="font-size:35px;">🌱</div>
+                <h3>Level 1</h3>
+                <h3>Nun Sukun & Tanwin</h3>
+                <p>
+                    Belajar Iqlab, Idgham, Izhar dan Ikhfa.
+                </p>
+                <div id="status1" class="status">
+                    🔓 TERBUKA
+                </div>
+            </div>
+
+
+            <div
+                id="levelCard2"
+                class="level-card locked"
+                onclick="selectLevel(2)"
+            >
+                <div style="font-size:35px;">🔥</div>
+                <h3>Level 2</h3>
+                <h3>Mim Sukun</h3>
+                <p>
+                    Belajar Ikhfa Syafawi, Idgham Mimi dan Izhar Syafawi.
+                </p>
+                <div id="status2" class="status">
+                    🔒 TERKUNCI
+                </div>
+            </div>
+
 
-<div class="game">
+            <div
+                id="levelCard3"
+                class="level-card locked"
+                onclick="selectLevel(3)"
+            >
+                <div style="font-size:35px;">👑</div>
+                <h3>Level 3</h3>
+                <h3>Mad</h3>
+                <p>
+                    Belajar berbagai macam hukum Mad.
+                </p>
+                <div id="status3" class="status">
+                    🔒 TERKUNCI
+                </div>
+            </div>
 
+        </div>
 
-<!-- ================= HOME ================= -->
 
-<div id="home">
+        <button
+            class="btn-warning"
+            style="width:100%;margin-top:20px;"
+            onclick="showAchievements()"
+        >
+            🏅 PRESTASI SAYA
+        </button>
 
-<div class="logo">
-📖🎮
-</div>
 
-<h1>
-Tajwid Adventure
-</h1>
+        <button
+            class="btn-secondary"
+            style="width:100%;margin-top:10px;"
+            onclick="showCertificate()"
+        >
+            🎓 LIHAT SERTIFIKAT
+        </button>
+
+
+        <button
+            class="btn-danger"
+            style="width:100%;margin-top:10px;"
+            onclick="resetProgress()"
+        >
+            🔄 RESET PROGRESS
+        </button>
+
+    </div>
 
-<p class="subtitle">
+
+    <!-- GAME SCREEN -->
+
+    <div id="gameScreen" class="hidden">
+
+        <div class="stats">
+
+            <div class="stat">
+                ❤️ Nyawa
+                <strong id="lives">3</strong>
+            </div>
+
+            <div class="stat">
+                ⭐ XP Level
+                <strong id="levelXP">0</strong>
+            </div>
+
+            <div class="stat">
+                ⭐ Total XP
+                <strong id="totalXP">0</strong>
+            </div>
 
-Belajar Tajwid,
-Naik Level,
-Lancar Membaca Al-Qur'an
+            <div class="stat">
+                📊 Soal
+                <strong>
+                    <span id="questionNumber">1</span>/<span id="questionTotal">8</span>
+                </strong>
+            </div>
 
-</p>
+        </div>
 
 
-<div class="stats">
+        <div class="card">
 
-<span>
-⭐ XP:
-<span id="totalXP">0</span>
-</span>
+            <div class="question-number">
+                SOAL <span id="qNumber">1</span>
+            </div>
 
-<span>
-🏆 Level:
-<span id="playerLevel">1</span>
-</span>
+            <div
+                id="arabicQuestion"
+                class="arabic"
+            >
+            </div>
 
-</div>
+            <div
+                id="questionText"
+                class="question-text"
+            >
+            </div>
 
+            <div
+                id="answers"
+                class="answers"
+            >
+            </div>
 
-<input
+            <div
+                id="feedback"
+                class="feedback hidden"
+            >
+            </div>
 
-id="studentName"
+        </div>
 
-type="text"
+    </div>
 
-placeholder="✍️ Masukkan nama santri"
 
-maxlength="40"
+    <!-- RESULT SCREEN -->
 
+    <div id="resultScreen" class="card hidden">
 
->
+        <div
+            id="resultIcon"
+            class="result-icon"
+        >
+            🏆
+        </div>
 
+        <h2
+            id="resultTitle"
+            class="result-title"
+        >
+            Level Selesai!
+        </h2>
 
-<h3>
-🎯 Pilih Petualangan
-</h3>
+        <div
+            id="resultContent"
+            class="result-stats"
+        >
+        </div>
 
+        <div
+            id="achievementResult"
+            style="margin-bottom:20px;"
+        >
+        </div>
 
-<div class="level-grid">
+        <div class="nav-buttons">
 
+            <button
+                class="btn-secondary"
+                onclick="backToHome()"
+            >
+                🏠 MENU UTAMA
+            </button>
 
-<!-- LEVEL 1 -->
+            <button
+                class="btn-primary"
+                onclick="continueAdventure()"
+            >
+                🚀 LANJUT
+            </button>
 
-<div
-class="level-card"
-onclick="startLevel(1)"
->
+        </div>
 
-<div class="badge-icon">
-🌱
-</div>
+    </div>
 
-<div class="level-title">
-Level 1
-</div>
 
-<div class="level-info">
-Nun Sukun & Tanwin
-</div>
+    <!-- ACHIEVEMENT SCREEN -->
 
-</div>
+    <div id="achievementScreen" class="card hidden">
 
+        <h2>🏅 PRESTASI SAYA</h2>
 
-<!-- LEVEL 2 -->
+        <p style="margin-top:8px;">
+            Kumpulkan semua prestasi selama petualangan Tajwid.
+        </p>
 
-<div
-id="level2Card"
-class="level-card locked"
->
+        <div style="margin-top:15px;">
+            <strong id="achievementProgress">
+                0 dari 6 prestasi terbuka
+            </strong>
 
-<div class="badge-icon">
-🔒
-</div>
+            <div class="progress-bar">
+                <div
+                    id="achievementProgressBar"
+                    class="progress-fill"
+                    style="width:0%"
+                ></div>
+            </div>
+        </div>
 
-<div class="level-title">
-Level 2
-</div>
 
-<div class="level-info">
-Mim Sukun — Terkunci
-</div>
+        <div
+            id="achievementGrid"
+            class="achievement-grid"
+        >
+        </div>
 
-</div>
 
+        <button
+            class="btn-secondary"
+            style="width:100%;margin-top:20px;"
+            onclick="backToHome()"
+        >
+            ← KEMBALI KE MENU
+        </button>
 
-<!-- LEVEL 3 -->
+    </div>
 
-<div
-id="level3Card"
-class="level-card locked"
->
 
-<div class="badge-icon">
-🔒
-</div>
+    <!-- CERTIFICATE -->
 
-<div class="level-title">
-Level 3
-</div>
+    <div id="certificateScreen" class="hidden">
 
-<div class="level-info">
-Mad — Terkunci
-</div>
+        <div class="card certificate">
 
-</div>
+            <div class="certificate-badge">
+                🎓
+            </div>
 
+            <h2>
+                PP MARDHOTULLAH AL ISLAMY
+            </h2>
 
-</div>
+            <h1>
+                SERTIFIKAT
+            </h1>
 
+            <p>
+                Diberikan kepada:
+            </p>
 
-<button
-class="main-btn"
-onclick="resetProgress()"
->
+            <div
+                id="certificateName"
+                class="name"
+            >
+            </div>
 
-🔄 RESET PROGRESS
+            <p>
+                atas keberhasilannya dalam mengikuti
+            </p>
 
-</button>
+            <h2 style="margin:15px 0;">
+                📖 TAJWID ADVENTURE
+            </h2>
 
+            <p>
+                dan menyelesaikan seluruh level pembelajaran Tajwid.
+            </p>
 
-</div>
+            <div style="margin:20px 0;">
 
+                <strong>
+                    ⭐ Total XP:
+                </strong>
 
-<!-- ================= GAME ================= -->
+                <span id="certificateXP">
+                    0
+                </span>
 
-<div
-id="gameScreen"
-class="hidden"
->
+            </div>
 
+            <div style="margin:20px 0;">
 
-<div class="stats">
+                <strong>
+                    🏅 Prestasi:
+                </strong>
 
-<span>
-⭐
-<span id="xp">0</span>
-XP
-</span>
+                <span id="certificateAchievement">
+                    0/6
+                </span>
 
-<span>
-❤️
-<span id="lives">3</span>
-</span>
+            </div>
 
-</div>
+            <p style="margin-top:30px;">
+                🌱 Terus belajar, terus membaca Al-Qur'an,
+                dan terus memperbaiki bacaan.
+            </p>
 
+            <p style="margin-top:30px;">
+                PP Mardhotullah Al Islamy
+            </p>
 
-<div class="level-name">
+        </div>
 
-<span id="levelName">
-</span>
 
-<br>
+        <div class="nav-buttons print-hide">
 
-<small id="questionNumber">
-</small>
+            <button
+                class="btn-secondary"
+                onclick="backToHome()"
+            >
+                ← MENU UTAMA
+            </button>
 
-</div>
+            <button
+                class="btn-primary"
+                onclick="window.print()"
+            >
+                🖨️ CETAK / SIMPAN PDF
+            </button>
 
+        </div>
 
-<div class="progress">
-
-<div
-class="progress-bar"
-id="progress"
->
-</div>
-
-</div>
-
-
-<div
-class="arabic"
-id="arabic"
->
-</div>
-
-
-<div
-class="question"
-id="question"
->
-</div>
-
-
-<div
-class="answers"
-id="answers"
->
-</div>
-
-
-<div
-class="feedback"
-id="feedback"
->
-</div>
-
-
-<button
-
-class="main-btn hidden"
-
-id="nextButton"
-
-onclick="nextQuestion()"
-
->
-
-SOAL BERIKUTNYA →
-
-</button>
-
-
-</div>
-
-
-<!-- ================= RESULT ================= -->
-
-<div
-id="result"
-class="hidden result"
->
-
-
-<div
-class="big-badge"
-id="resultBadge"
->
-🏆
-</div>
-
-
-<h1 id="resultTitle">
-Level Selesai!
-</h1>
-
-
-<p id="resultText">
-</p>
-
-
-<div class="score">
-
-⭐
-<span id="resultXP">
-0
-</span>
-XP
-
-</div>
-
-
-<div
-id="badgeText"
->
-</div>
-
-
-<button
-
-class="main-btn"
-
-onclick="backHome()"
-
->
-
-🏠 KEMBALI KE MENU
-
-</button>
-
-
-<button
-
-id="certificateButton"
-
-class="main-btn hidden"
-
-onclick="showCertificate()"
-
->
-
-🎓 LIHAT SERTIFIKAT
-
-</button>
-
-
-</div>
-
-
-<!-- ================= CERTIFICATE ================= -->
-
-<div
-id="certificate"
-class="hidden"
->
-
-
-<div class="certificate">
-
-
-<div class="cert-badge">
-🏆
-</div>
-
-
-<h2>
-SERTIFIKAT
-</h2>
-
-
-<h3>
-TAJWID ADVENTURE
-</h3>
-
-
-<p>
-Diberikan kepada:
-</p>
-
-
-<div
-class="student"
-id="certificateName"
->
-</div>
-
-
-<p>
-
-Atas keberhasilannya menyelesaikan
-seluruh Level Tajwid Adventure
-dan menunjukkan pemahaman dasar
-hukum-hukum tajwid.
-
-</p>
-
-
-<h3>
-👑 MASTER TAJWID
-</h3>
-
-
-<p>
-
-⭐ Total XP:
-<span id="certificateXP">
-</span>
-
-<br>
-
-📊 Akurasi terbaik:
-<span id="certificateAccuracy">
-</span>
-
-</p>
-
-
-<p class="small">
-
-Terus belajar,
-terus membaca,
-dan terus dekat dengan Al-Qur'an.
-
-</p>
-
-
-</div>
-
-
-<button
-
-class="main-btn no-print"
-
-onclick="window.print()"
-
->
-
-🖨️ CETAK / SIMPAN PDF
-
-</button>
-
-
-<button
-
-class="main-btn no-print"
-
-onclick="backHome()"
-
->
-
-🏠 KEMBALI KE MENU
-
-</button>
-
-
-</div>
-
+    </div>
 
 </div>
 
 
 <script>
 
+/* =====================================================
+   DATA SOAL
+===================================================== */
 
-/* ===================================
-   DATA LEVEL
-=================================== */
-
-const levels={
-
+const levels = {
 
 1:{
+    name:"Nun Sukun & Tanwin",
+    icon:"🌱",
 
-name:
-"Level 1 — Nun Sukun & Tanwin",
+    questions:[
 
-questions:[
+        {
+            text:"مِنْ بَعْدِ",
+            focus:"نْ ب",
+            answer:"Iqlab"
+        },
 
-{
-arabic:"مِنْ بَعْدِ",
-focus:"نْ ب",
-answer:"Iqlab",
-explanation:
-"Nun sukun bertemu huruf ب, hukumnya Iqlab."
-},
+        {
+            text:"مَنْ يَقُولُ",
+            focus:"نْ ي",
+            answer:"Idgham Bighunnah"
+        },
 
-{
-arabic:"مَنْ يَقُولُ",
-focus:"نْ ي",
-answer:"Idgham Bighunnah",
-explanation:
-"Nun sukun bertemu ي, hukumnya Idgham Bighunnah."
-},
+        {
+            text:"مِنْ رَبِّهِمْ",
+            focus:"نْ ر",
+            answer:"Idgham Bilaghunnah"
+        },
 
-{
-arabic:"مِنْ رَبِّهِمْ",
-focus:"نْ ر",
-answer:"Idgham Bilaghunnah",
-explanation:
-"Nun sukun bertemu ر, hukumnya Idgham Bilaghunnah."
-},
+        {
+            text:"مِنْ هَادٍ",
+            focus:"نْ ه",
+            answer:"Izhar Halqi"
+        },
 
-{
-arabic:"مِنْ هَادٍ",
-focus:"نْ ه",
-answer:"Izhar Halqi",
-explanation:
-"Nun sukun bertemu ه, hukumnya Izhar Halqi."
-},
+        {
+            text:"مِنْ شَرِّ",
+            focus:"نْ ش",
+            answer:"Ikhfa"
+        },
 
-{
-arabic:"مِنْ شَرِّ",
-focus:"نْ ش",
-answer:"Ikhfa",
-explanation:
-"Nun sukun bertemu ش, hukumnya Ikhfa."
-},
+        {
+            text:"أَنْعَمْتَ",
+            focus:"نْ ع",
+            answer:"Izhar Halqi"
+        },
 
-{
-arabic:"أَنْعَمْتَ",
-focus:"نْ ع",
-answer:"Izhar Halqi",
-explanation:
-"Nun sukun bertemu ع, hukumnya Izhar Halqi."
-},
+        {
+            text:"مِنْ وَالٍ",
+            focus:"نْ و",
+            answer:"Idgham Bighunnah"
+        },
 
-{
-arabic:"مِنْ وَالٍ",
-focus:"نْ و",
-answer:"Idgham Bighunnah",
-explanation:
-"Nun sukun bertemu و, hukumnya Idgham Bighunnah."
-},
+        {
+            text:"مِنْ لَدُنْهُ",
+            focus:"نْ ل",
+            answer:"Idgham Bilaghunnah"
+        }
 
-{
-arabic:"مِنْ لَدُنْهُ",
-focus:"نْ ل",
-answer:"Idgham Bilaghunnah",
-explanation:
-"Nun sukun bertemu ل, hukumnya Idgham Bilaghunnah."
-}
-
-]
-
+    ]
 },
 
 
 2:{
+    name:"Mim Sukun",
+    icon:"🔥",
 
-name:
-"Level 2 — Mim Sukun",
+    questions:[
 
-questions:[
+        {
+            text:"تَرْمِيهِمْ بِحِجَارَةٍ",
+            focus:"مْ ب",
+            answer:"Ikhfa Syafawi"
+        },
 
-{
-arabic:"تَرْمِيهِمْ بِحِجَارَةٍ",
-focus:"مْ ب",
-answer:"Ikhfa Syafawi",
-explanation:
-"Mim sukun bertemu ب, hukumnya Ikhfa Syafawi."
-},
+        {
+            text:"لَهُمْ مَا",
+            focus:"مْ م",
+            answer:"Idgham Mimi"
+        },
 
-{
-arabic:"لَهُمْ مَا",
-focus:"مْ م",
-answer:"Idgham Mimi",
-explanation:
-"Mim sukun bertemu mim, hukumnya Idgham Mimi."
-},
+        {
+            text:"عَلَيْهِمْ غَيْرِ",
+            focus:"مْ غ",
+            answer:"Izhar Syafawi"
+        },
 
-{
-arabic:"عَلَيْهِمْ غَيْرِ",
-focus:"مْ غ",
-answer:"Izhar Syafawi",
-explanation:
-"Mim sukun bertemu غ, hukumnya Izhar Syafawi."
-},
+        {
+            text:"هُمْ فِيهَا",
+            focus:"مْ ف",
+            answer:"Izhar Syafawi"
+        },
 
-{
-arabic:"هُمْ فِيهَا",
-focus:"مْ ف",
-answer:"Izhar Syafawi",
-explanation:
-"Mim sukun bertemu ف, hukumnya Izhar Syafawi."
-},
+        {
+            text:"أَمْ مَنْ",
+            focus:"مْ م",
+            answer:"Idgham Mimi"
+        },
 
-{
-arabic:"أَمْ مَنْ",
-focus:"مْ م",
-answer:"Idgham Mimi",
-explanation:
-"Mim sukun bertemu mim, hukumnya Idgham Mimi."
-},
+        {
+            text:"عَلَيْهِمْ بِمَا",
+            focus:"مْ ب",
+            answer:"Ikhfa Syafawi"
+        }
 
-{
-arabic:"عَلَيْهِمْ بِمَا",
-focus:"مْ ب",
-answer:"Ikhfa Syafawi",
-explanation:
-"Mim sukun bertemu ب, hukumnya Ikhfa Syafawi."
-}
-
-]
-
+    ]
 },
 
 
 3:{
+    name:"Mad",
+    icon:"👑",
 
-name:
-"Level 3 — Mad",
+    questions:[
 
-questions:[
+        {
+            text:"قَالَ",
+            focus:"قَا",
+            answer:"Mad Thabi'i"
+        },
 
-{
-arabic:"قَالَ",
-focus:"قَا",
-answer:"Mad Thabi'i",
-explanation:
-"Alif didahului fathah dan dibaca panjang dua harakat."
-},
+        {
+            text:"قِيلَ",
+            focus:"قِي",
+            answer:"Mad Thabi'i"
+        },
 
-{
-arabic:"قِيلَ",
-focus:"قِي",
-answer:"Mad Thabi'i",
-explanation:
-"Ya sukun didahului kasrah dan dibaca panjang dua harakat."
-},
+        {
+            text:"يَقُولُ",
+            focus:"قُو",
+            answer:"Mad Thabi'i"
+        },
 
-{
-arabic:"يَقُولُ",
-focus:"قُو",
-answer:"Mad Thabi'i",
-explanation:
-"Wawu sukun didahului dhammah dan dibaca panjang dua harakat."
-},
+        {
+            text:"جَاءَ",
+            focus:"جَاءَ",
+            answer:"Mad Wajib Muttashil"
+        },
 
-{
-arabic:"جَاءَ",
-focus:"جَاءَ",
-answer:"Mad Wajib Muttashil",
-explanation:
-"Huruf mad bertemu hamzah dalam satu kata."
-},
+        {
+            text:"السَّمَاءِ",
+            focus:"مَاءِ",
+            answer:"Mad Wajib Muttashil"
+        },
 
-{
-arabic:"السَّمَاءِ",
-focus:"مَاءِ",
-answer:"Mad Wajib Muttashil",
-explanation:
-"Huruf mad bertemu hamzah dalam satu kata."
-},
+        {
+            text:"إِنَّا أَعْطَيْنَاكَ",
+            focus:"نَّا أَ",
+            answer:"Mad Jaiz Munfashil"
+        },
 
-{
-arabic:"إِنَّا أَعْطَيْنَاكَ",
-focus:"نَّا أَ",
-answer:"Mad Jaiz Munfashil",
-explanation:
-"Huruf mad bertemu hamzah pada kata berikutnya."
-},
+        {
+            text:"فِي أَنْفُسِكُمْ",
+            focus:"فِي أَ",
+            answer:"Mad Jaiz Munfashil"
+        },
 
-{
-arabic:"فِي أَنْفُسِكُمْ",
-focus:"فِي أَ",
-answer:"Mad Jaiz Munfashil",
-explanation:
-"Huruf mad bertemu hamzah pada kata berikutnya."
-},
+        {
+            text:"الْعَالَمِينَ",
+            focus:"مِينَ",
+            answer:"Mad 'Aridh Lissukun"
+        }
 
-{
-arabic:"الْعَالَمِينَ",
-focus:"مِينَ",
-answer:"Mad 'Aridh Lissukun",
-explanation:
-"Mad terjadi ketika berhenti pada akhir kata sehingga huruf terakhir menjadi sukun."
-}
-
-]
-
+    ]
 }
 
 };
 
 
-/* ===================================
-   BANK JAWABAN
-=================================== */
+/* =====================================================
+   JAWABAN
+===================================================== */
 
-const answerPool=[
+const answerPool = [
 
 "Iqlab",
-
 "Idgham Bighunnah",
-
 "Idgham Bilaghunnah",
-
 "Izhar Halqi",
-
 "Ikhfa",
-
 "Ikhfa Syafawi",
-
 "Idgham Mimi",
-
 "Izhar Syafawi",
-
 "Mad Thabi'i",
-
 "Mad Wajib Muttashil",
-
 "Mad Jaiz Munfashil",
-
 "Mad 'Aridh Lissukun"
 
 ];
 
 
-/* ===================================
-   VARIABEL
-=================================== */
+/* =====================================================
+   ACHIEVEMENTS
+===================================================== */
 
-let currentLevel=1;
+const achievementDefinitions = [
 
-let currentQuestion=0;
+    {
+        id:"level1",
+        icon:"🌱",
+        title:"Pejuang Tajwid",
+        description:"Menyelesaikan Level 1: Nun Sukun & Tanwin."
+    },
 
-let xp=0;
+    {
+        id:"level2",
+        icon:"🔥",
+        title:"Ahli Mim Sukun",
+        description:"Menyelesaikan Level 2: Mim Sukun."
+    },
 
-let lives=3;
+    {
+        id:"level3",
+        icon:"👑",
+        title:"Master Tajwid",
+        description:"Menyelesaikan Level 3: Mad."
+    },
 
-let correct=0;
+    {
+        id:"perfect",
+        icon:"🎯",
+        title:"Perfect Score",
+        description:"Mendapatkan nilai 100% dalam satu level."
+    },
 
-let answered=false;
+    {
+        id:"flawless",
+        icon:"⚡",
+        title:"Tanpa Kesalahan",
+        description:"Menyelesaikan satu level tanpa kehilangan nyawa."
+    },
 
-let unlockedLevel=
-parseInt(
-localStorage.getItem("tajwidUnlocked") || "1"
-);
+    {
+        id:"all",
+        icon:"📚",
+        title:"Pemburu Ilmu",
+        description:"Menyelesaikan seluruh 3 level Tajwid Adventure."
+    }
 
-let studentName=
-localStorage.getItem("studentName") || "";
-
-let completedLevels=
-JSON.parse(
-localStorage.getItem("tajwidCompleted") || "[]"
-);
+];
 
 
-/* ===================================
-   UPDATE MENU
-=================================== */
+/* =====================================================
+   STATE
+===================================================== */
+
+let currentLevel = 1;
+let currentQuestion = 0;
+
+let lives = 3;
+let levelXP = 0;
+
+let correctAnswers = 0;
+let answered = false;
+let resultProcessed = false;
+
+
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
+
+function getTotalXP(){
+
+    return parseInt(
+        localStorage.getItem("tajwidTotalXP") || "0"
+    );
+
+}
+
+
+function saveTotalXP(value){
+
+    localStorage.setItem(
+        "tajwidTotalXP",
+        value
+    );
+
+}
+
+
+function getUnlockedLevel(){
+
+    return parseInt(
+        localStorage.getItem("tajwidUnlocked") || "1"
+    );
+
+}
+
+
+function saveUnlockedLevel(level){
+
+    localStorage.setItem(
+        "tajwidUnlocked",
+        level
+    );
+
+}
+
+
+function getCompletedLevels(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem("tajwidCompleted") || "[]"
+        );
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function saveCompletedLevels(levels){
+
+    localStorage.setItem(
+        "tajwidCompleted",
+        JSON.stringify(levels)
+    );
+
+}
+
+
+function getAchievements(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem("tajwidAchievements") || "{}"
+        );
+
+    }catch(e){
+
+        return {};
+
+    }
+
+}
+
+
+function saveAchievements(data){
+
+    localStorage.setItem(
+        "tajwidAchievements",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+function initialize(){
+
+    const savedName =
+        localStorage.getItem("studentName") || "";
+
+    document.getElementById("studentName").value =
+        savedName;
+
+    updateHome();
+
+}
+
+
+/* =====================================================
+   SAVE NAME
+===================================================== */
+
+function saveNameAndStart(){
+
+    const name =
+        document.getElementById("studentName")
+        .value
+        .trim();
+
+    if(!name){
+
+        showToast("⚠️ Silakan masukkan nama santri terlebih dahulu.");
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "studentName",
+        name
+    );
+
+    updateHome();
+
+    showToast(
+        "🎉 Selamat datang, " + name + "!"
+    );
+
+}
+
+
+/* =====================================================
+   HOME UPDATE
+===================================================== */
 
 function updateHome(){
 
-document.getElementById("totalXP").innerText=
-completedLevels.length*100;
+    const totalXP =
+        getTotalXP();
 
-document.getElementById("playerLevel").innerText=
-unlockedLevel;
+    const unlocked =
+        getUnlockedLevel();
+
+    const completed =
+        getCompletedLevels();
+
+    const achievements =
+        getAchievements();
+
+    const achievementCount =
+        Object.values(achievements)
+        .filter(Boolean)
+        .length;
 
 
-/* LEVEL 2 */
+    document.getElementById("homeXP")
+        .textContent = totalXP;
 
-if(unlockedLevel>=2){
 
-const card=
-document.getElementById("level2Card");
+    document.getElementById("homeLevel")
+        .textContent = unlocked;
 
-card.classList.remove("locked");
 
-card.innerHTML=`
+    document.getElementById("homeAchievement")
+        .textContent =
+        achievementCount + "/6";
 
-<div class="badge-icon">
-🔥
-</div>
 
-<div class="level-title">
-Level 2
-</div>
+    document.getElementById("homeCompleted")
+        .textContent =
+        completed.length + "/3";
 
-<div class="level-info">
-Mim Sukun — TERBUKA!
-</div>
 
-`;
+    for(let i=1;i<=3;i++){
 
-card.onclick=
-function(){
+        const card =
+            document.getElementById(
+                "levelCard" + i
+            );
 
-startLevel(2);
+        const status =
+            document.getElementById(
+                "status" + i
+            );
 
-};
+        if(i <= unlocked){
+
+            card.classList.remove("locked");
+
+            if(completed.includes(i)){
+
+                status.textContent =
+                    "🏆 SELESAI";
+
+            }else{
+
+                status.textContent =
+                    "🔓 TERBUKA";
+
+            }
+
+        }else{
+
+            card.classList.add("locked");
+
+            status.textContent =
+                "🔒 TERKUNCI";
+
+        }
+
+    }
 
 }
 
 
-/* LEVEL 3 */
+/* =====================================================
+   SELECT LEVEL
+===================================================== */
 
-if(unlockedLevel>=3){
+function selectLevel(level){
 
-const card=
-document.getElementById("level3Card");
+    const unlocked =
+        getUnlockedLevel();
 
-card.classList.remove("locked");
+    if(level > unlocked){
 
-card.innerHTML=`
+        showToast(
+            "🔒 Level ini masih terkunci. Selesaikan level sebelumnya."
+        );
 
-<div class="badge-icon">
-👑
-</div>
+        return;
 
-<div class="level-title">
-Level 3
-</div>
+    }
 
-<div class="level-info">
-Mad — TERBUKA!
-</div>
+    const name =
+        localStorage.getItem("studentName");
 
-`;
+    if(!name){
 
-card.onclick=
-function(){
+        showToast(
+            "⚠️ Masukkan nama santri terlebih dahulu."
+        );
 
-startLevel(3);
+        return;
 
-};
+    }
+
+    startLevel(level);
 
 }
 
-}
 
-
-/* ===================================
+/* =====================================================
    START LEVEL
-=================================== */
+===================================================== */
 
 function startLevel(level){
 
-studentName=
-document.getElementById("studentName")
-.value
-.trim();
+    currentLevel = level;
+    currentQuestion = 0;
+
+    lives = 3;
+    levelXP = 0;
+
+    correctAnswers = 0;
+
+    answered = false;
+    resultProcessed = false;
 
 
-if(!studentName){
+    document.getElementById("homeScreen")
+        .classList.add("hidden");
 
-alert(
-"✍️ Masukkan nama santri terlebih dahulu!"
-);
+    document.getElementById("resultScreen")
+        .classList.add("hidden");
 
-document.getElementById("studentName")
-.focus();
+    document.getElementById("achievementScreen")
+        .classList.add("hidden");
 
-return;
+    document.getElementById("certificateScreen")
+        .classList.add("hidden");
 
-}
-
-
-localStorage.setItem(
-"studentName",
-studentName
-);
+    document.getElementById("gameScreen")
+        .classList.remove("hidden");
 
 
-if(level>unlockedLevel){
-
-alert(
-"🔒 Level ini masih terkunci!"
-);
-
-return;
-
-}
+    document.getElementById("questionTotal")
+        .textContent =
+        levels[level].questions.length;
 
 
-currentLevel=level;
+    updateGameStats();
 
-currentQuestion=0;
-
-xp=0;
-
-lives=3;
-
-correct=0;
-
-document.getElementById("home")
-.classList.add("hidden");
-
-document.getElementById("result")
-.classList.add("hidden");
-
-document.getElementById("certificate")
-.classList.add("hidden");
-
-document.getElementById("gameScreen")
-.classList.remove("hidden");
-
-showQuestion();
+    showQuestion();
 
 }
 
 
-/* ===================================
+/* =====================================================
    SHOW QUESTION
-=================================== */
+===================================================== */
 
 function showQuestion(){
 
-answered=false;
+    const question =
+        levels[currentLevel]
+        .questions[currentQuestion];
 
-const data=
-levels[currentLevel];
-
-const q=
-data.questions[currentQuestion];
+    answered = false;
 
 
-document.getElementById("xp")
-.innerText=xp;
-
-document.getElementById("lives")
-.innerText=lives;
+    document.getElementById("qNumber")
+        .textContent =
+        currentQuestion + 1;
 
 
-document.getElementById("levelName")
-.innerText=data.name;
+    document.getElementById("questionNumber")
+        .textContent =
+        currentQuestion + 1;
 
 
-document.getElementById("questionNumber")
-.innerText=
-"Soal "+
-(currentQuestion+1)+
-" dari "+
-data.questions.length;
+    document.getElementById("arabicQuestion")
+        .textContent =
+        question.text;
 
 
-document.getElementById("progress")
-.style.width=
-(
-(currentQuestion+1)/
-data.questions.length*100
-)+"%";
+    document.getElementById("questionText")
+        .textContent =
+        "Apakah hukum tajwid pada bagian " +
+        question.focus + "?";
 
 
-document.getElementById("arabic")
-.innerText=q.arabic;
+    const answers =
+        createAnswers(
+            question.answer
+        );
 
 
-document.getElementById("question")
-.innerHTML=
-"Apa hukum tajwid pada bagian <b>"+
-q.focus+
-"</b>?";
+    const container =
+        document.getElementById("answers");
+
+    container.innerHTML = "";
 
 
-document.getElementById("feedback")
-.innerText="";
+    answers.forEach(answer => {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "answer-btn";
+
+        button.textContent =
+            answer;
+
+        button.onclick = function(){
+
+            checkAnswer(
+                answer,
+                button
+            );
+
+        };
+
+        container.appendChild(button);
+
+    });
 
 
-document.getElementById("nextButton")
-.classList.add("hidden");
+    const feedback =
+        document.getElementById("feedback");
 
+    feedback.className =
+        "feedback hidden";
 
-let options=[q.answer];
-
-
-let shuffled=
-answerPool
-.filter(
-x=>x!==q.answer
-)
-.sort(
-()=>Math.random()-.5
-);
-
-
-options=
-options.concat(
-shuffled.slice(0,3)
-);
-
-
-options.sort(
-()=>Math.random()-.5
-);
-
-
-const box=
-document.getElementById("answers");
-
-box.innerHTML="";
-
-
-options.forEach(
-option=>{
-
-const button=
-document.createElement("button");
-
-button.innerText=option;
-
-button.className="answer";
-
-button.onclick=
-function(){
-
-checkAnswer(
-button,
-option
-);
-
-};
-
-box.appendChild(button);
-
-}
-
-);
+    feedback.textContent = "";
 
 }
 
 
-/* ===================================
+/* =====================================================
+   CREATE ANSWERS
+===================================================== */
+
+function createAnswers(correct){
+
+    let choices = [correct];
+
+    while(choices.length < 4){
+
+        const random =
+            answerPool[
+                Math.floor(
+                    Math.random() *
+                    answerPool.length
+                )
+            ];
+
+        if(!choices.includes(random)){
+
+            choices.push(random);
+
+        }
+
+    }
+
+    return choices.sort(
+        () => Math.random() - 0.5
+    );
+
+}
+
+
+/* =====================================================
    CHECK ANSWER
-=================================== */
+===================================================== */
 
-function checkAnswer(
-button,
-answer
-){
+function checkAnswer(answer, button){
 
-if(answered)return;
+    if(answered) return;
 
-answered=true;
+    answered = true;
 
 
-const q=
-levels[currentLevel]
-.questions[currentQuestion];
+    const question =
+        levels[currentLevel]
+        .questions[currentQuestion];
 
 
-const buttons=
-document.querySelectorAll(".answer");
+    const buttons =
+        document.querySelectorAll(".answer-btn");
 
 
-buttons.forEach(
-btn=>{
-btn.disabled=true;
-}
-);
+    buttons.forEach(btn => {
+
+        btn.disabled = true;
+
+        if(btn.textContent === question.answer){
+
+            btn.classList.add("correct");
+
+        }
+
+    });
 
 
-if(answer===q.answer){
-
-button.classList.add("correct");
-
-xp+=10;
-
-correct++;
+    const feedback =
+        document.getElementById("feedback");
 
 
-document.getElementById("feedback")
-.innerHTML=
-"✅ BENAR!<br>"+
-q.explanation;
+    if(answer === question.answer){
 
-}else{
+        correctAnswers++;
 
-button.classList.add("wrong");
+        levelXP += 10;
 
-lives--;
+        button.classList.add("correct");
 
+        feedback.className =
+            "feedback correct";
 
-buttons.forEach(
-btn=>{
+        feedback.textContent =
+            "✅ BENAR! +10 XP";
 
-if(btn.innerText===q.answer){
+    }else{
 
-btn.classList.add("correct");
+        lives--;
 
-}
+        button.classList.add("wrong");
 
-});
+        feedback.className =
+            "feedback wrong";
 
+        feedback.textContent =
+            "❌ Kurang tepat. Jawaban: " +
+            question.answer;
 
-document.getElementById("feedback")
-.innerHTML=
-"❌ BELUM TEPAT!<br>"+
-q.explanation;
-
-}
+    }
 
 
-document.getElementById("xp")
-.innerText=xp;
+    updateGameStats();
 
 
-document.getElementById("lives")
-.innerText=lives;
+    setTimeout(() => {
+
+        if(lives <= 0){
+
+            finishLevel(false);
+
+            return;
+
+        }
 
 
-document.getElementById("nextButton")
-.classList.remove("hidden");
-
-}
+        currentQuestion++;
 
 
-/* ===================================
-   NEXT QUESTION
-=================================== */
+        if(
+            currentQuestion >=
+            levels[currentLevel].questions.length
+        ){
 
-function nextQuestion(){
+            finishLevel(true);
 
-const total=
-levels[currentLevel]
-.questions.length;
+        }else{
 
+            showQuestion();
 
-if(lives<=0){
+        }
 
-showResult();
-
-return;
+    },1000);
 
 }
 
 
-if(currentQuestion>=total-1){
+/* =====================================================
+   UPDATE GAME STATS
+===================================================== */
 
-showResult();
+function updateGameStats(){
 
-return;
-
-}
-
-
-currentQuestion++;
-
-showQuestion();
-
-}
+    document.getElementById("lives")
+        .textContent = lives;
 
 
-/* ===================================
-   RESULT
-=================================== */
-
-function showResult(){
-
-document.getElementById("gameScreen")
-.classList.add("hidden");
-
-document.getElementById("result")
-.classList.remove("hidden");
+    document.getElementById("levelXP")
+        .textContent = levelXP;
 
 
-const total=
-levels[currentLevel]
-.questions.length;
-
-
-const accuracy=
-Math.round(
-(correct/total)*100
-);
-
-
-document.getElementById("resultText")
-.innerText=
-studentName+
-", kamu menjawab "+
-correct+
-" dari "+
-total+
-" soal dengan benar. Akurasi: "+
-accuracy+"%";
-
-
-document.getElementById("resultXP")
-.innerText=xp;
-
-
-let success=
-lives>0 &&
-accuracy>=70;
-
-
-if(success){
-
-if(
-!completedLevels.includes(
-currentLevel
-)
-){
-
-completedLevels.push(
-currentLevel
-);
+    document.getElementById("totalXP")
+        .textContent = getTotalXP() + levelXP;
 
 }
 
 
-if(currentLevel===1){
+/* =====================================================
+   FINISH LEVEL
+===================================================== */
 
-unlockedLevel=2;
+function finishLevel(success){
 
-document.getElementById("resultBadge")
-.innerText="🌱";
+    if(resultProcessed) return;
 
-document.getElementById("badgeText")
-.innerHTML=
-"<h3>🌱 PEJUANG TAJWID</h3>";
+    resultProcessed = true;
+
+
+    const totalQuestions =
+        levels[currentLevel]
+        .questions.length;
+
+
+    const accuracy =
+        Math.round(
+            (correctAnswers /
+            totalQuestions) * 100
+        );
+
+
+    const oldTotalXP =
+        getTotalXP();
+
+
+    saveTotalXP(
+        oldTotalXP + levelXP
+    );
+
+
+    if(success){
+
+        completeLevel(
+            currentLevel
+        );
+
+    }
+
+
+    document.getElementById("gameScreen")
+        .classList.add("hidden");
+
+
+    document.getElementById("resultScreen")
+        .classList.remove("hidden");
+
+
+    const resultIcon =
+        document.getElementById("resultIcon");
+
+
+    const resultTitle =
+        document.getElementById("resultTitle");
+
+
+    const resultContent =
+        document.getElementById("resultContent");
+
+
+    const achievementResult =
+        document.getElementById(
+            "achievementResult"
+        );
+
+
+    if(success){
+
+        resultIcon.textContent =
+            "🏆";
+
+        resultTitle.textContent =
+            "Level Selesai!";
+
+
+        resultContent.innerHTML = `
+
+            <div class="result-row">
+                <span>📚 Level</span>
+                <strong>${currentLevel}</strong>
+            </div>
+
+            <div class="result-row">
+                <span>✅ Jawaban Benar</span>
+                <strong>${correctAnswers}/${totalQuestions}</strong>
+            </div>
+
+            <div class="result-row">
+                <span>📊 Nilai</span>
+                <strong>${accuracy}%</strong>
+            </div>
+
+            <div class="result-row">
+                <span>⭐ XP Didapat</span>
+                <strong>+${levelXP}</strong>
+            </div>
+
+            <div class="result-row">
+                <span>⭐ Total XP</span>
+                <strong>${getTotalXP()}</strong>
+            </div>
+
+        `;
+
+
+        let unlockedMessages = [];
+
+
+        if(
+            accuracy === 100
+        ){
+
+            unlockAchievement(
+                "perfect"
+            );
+
+            unlockedMessages.push(
+                "🎯 Perfect Score"
+            );
+
+        }
+
+
+        if(
+            lives === 3
+        ){
+
+            unlockAchievement(
+                "flawless"
+            );
+
+            unlockedMessages.push(
+                "⚡ Tanpa Kesalahan"
+            );
+
+        }
+
+
+        if(currentLevel === 1){
+
+            unlockAchievement(
+                "level1"
+            );
+
+            unlockedMessages.push(
+                "🌱 Pejuang Tajwid"
+            );
+
+        }
+
+
+        if(currentLevel === 2){
+
+            unlockAchievement(
+                "level2"
+            );
+
+            unlockedMessages.push(
+                "🔥 Ahli Mim Sukun"
+            );
+
+        }
+
+
+        if(currentLevel === 3){
+
+            unlockAchievement(
+                "level3"
+            );
+
+            unlockedMessages.push(
+                "👑 Master Tajwid"
+            );
+
+        }
+
+
+        const completed =
+            getCompletedLevels();
+
+
+        if(
+            completed.includes(1) &&
+            completed.includes(2) &&
+            completed.includes(3)
+        ){
+
+            unlockAchievement("all");
+
+            unlockedMessages.push(
+                "📚 Pemburu Ilmu"
+            );
+
+        }
+
+
+        if(unlockedMessages.length){
+
+            achievementResult.innerHTML = `
+
+                <div style="
+                    background:#ecfdf5;
+                    border:2px solid #10b981;
+                    padding:18px;
+                    border-radius:18px;
+                    text-align:center;
+                ">
+
+                    <strong>
+                        🎉 PRESTASI TERBUKA!
+                    </strong>
+
+                    <div style="margin-top:10px;">
+                        ${unlockedMessages.join("<br>")}
+                    </div>
+
+                </div>
+
+            `;
+
+        }else{
+
+            achievementResult.innerHTML = "";
+
+        }
+
+
+    }else{
+
+        resultIcon.textContent =
+            "💔";
+
+        resultTitle.textContent =
+            "Nyawa Habis";
+
+
+        resultContent.innerHTML = `
+
+            <div class="result-row">
+                <span>📚 Level</span>
+                <strong>${currentLevel}</strong>
+            </div>
+
+            <div class="result-row">
+                <span>✅ Jawaban Benar</span>
+                <strong>${correctAnswers}/${totalQuestions}</strong>
+            </div>
+
+            <div class="result-row">
+                <span>📊 Nilai</span>
+                <strong>${accuracy}%</strong>
+            </div>
+
+            <div class="result-row">
+                <span>⭐ XP Didapat</span>
+                <strong>+${levelXP}</strong>
+            </div>
+
+        `;
+
+
+        achievementResult.innerHTML = `
+
+            <div style="
+                background:#fef2f2;
+                border:2px solid #fecaca;
+                padding:18px;
+                border-radius:18px;
+                text-align:center;
+            ">
+
+                ❤️ Jangan menyerah!
+
+                <br><br>
+
+                Coba lagi dan tingkatkan
+                kemampuan Tajwidmu.
+
+            </div>
+
+        `;
+
+    }
+
+
+    updateHome();
 
 }
 
 
-if(currentLevel===2){
+/* =====================================================
+   COMPLETE LEVEL
+===================================================== */
 
-unlockedLevel=3;
+function completeLevel(level){
 
-document.getElementById("resultBadge")
-.innerText="🔥";
-
-document.getElementById("badgeText")
-.innerHTML=
-"<h3>🔥 AHLI MIM SUKUN</h3>";
-
-}
+    let completed =
+        getCompletedLevels();
 
 
-if(currentLevel===3){
+    if(!completed.includes(level)){
 
-document.getElementById("resultBadge")
-.innerText="👑";
+        completed.push(level);
 
-document.getElementById("badgeText")
-.innerHTML=
-"<h3>👑 MASTER TAJWID</h3>";
+        completed.sort();
 
-}
+        saveCompletedLevels(
+            completed
+        );
 
-
-document.getElementById("resultTitle")
-.innerText=
-"🎉 LEVEL BERHASIL!";
+    }
 
 
-/* SEMUA LEVEL */
+    const unlocked =
+        getUnlockedLevel();
 
-if(
-completedLevels.includes(1) &&
-completedLevels.includes(2) &&
-completedLevels.includes(3)
-){
 
-document.getElementById(
-"certificateButton"
-)
-.classList.remove("hidden");
+    if(
+        level < 3 &&
+        unlocked < level + 1
+    ){
 
-}
+        saveUnlockedLevel(
+            level + 1
+        );
 
-}else{
+        showToast(
+            "🔓 Level " +
+            (level + 1) +
+            " berhasil dibuka!"
+        );
 
-document.getElementById("resultTitle")
-.innerText=
-"💪 COBA LAGI!";
-
-document.getElementById("resultBadge")
-.innerText="🌱";
-
-document.getElementById("badgeText")
-.innerHTML=
-"<h3>Belum mendapatkan badge.</h3>";
+    }
 
 }
 
 
-saveProgress();
+/* =====================================================
+   ACHIEVEMENT
+===================================================== */
 
-updateHome();
+function unlockAchievement(id){
 
-}
+    const achievements =
+        getAchievements();
 
 
-/* ===================================
-   SAVE PROGRESS
-=================================== */
+    if(!achievements[id]){
 
-function saveProgress(){
+        achievements[id] = true;
 
-localStorage.setItem(
-"tajwidUnlocked",
-unlockedLevel
-);
+        saveAchievements(
+            achievements
+        );
 
-localStorage.setItem(
-"tajwidCompleted",
-JSON.stringify(
-completedLevels
-)
-);
-
-localStorage.setItem(
-"studentName",
-studentName
-);
+    }
 
 }
 
 
-/* ===================================
+/* =====================================================
+   SHOW ACHIEVEMENTS
+===================================================== */
+
+function showAchievements(){
+
+    document.getElementById("homeScreen")
+        .classList.add("hidden");
+
+    document.getElementById("resultScreen")
+        .classList.add("hidden");
+
+    document.getElementById("gameScreen")
+        .classList.add("hidden");
+
+    document.getElementById("certificateScreen")
+        .classList.add("hidden");
+
+    document.getElementById("achievementScreen")
+        .classList.remove("hidden");
+
+
+    renderAchievements();
+
+}
+
+
+/* =====================================================
+   RENDER ACHIEVEMENTS
+===================================================== */
+
+function renderAchievements(){
+
+    const achievements =
+        getAchievements();
+
+
+    const grid =
+        document.getElementById(
+            "achievementGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    let unlockedCount = 0;
+
+
+    achievementDefinitions.forEach(
+        achievement => {
+
+            const unlocked =
+                achievements[
+                    achievement.id
+                ] === true;
+
+
+            if(unlocked){
+
+                unlockedCount++;
+
+            }
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "achievement " +
+                (
+                    unlocked
+                    ? "unlocked"
+                    : "locked"
+                );
+
+
+            card.innerHTML = `
+
+                <div class="achievement-icon">
+                    ${
+                        unlocked
+                        ? achievement.icon
+                        : "🔒"
+                    }
+                </div>
+
+                <h3>
+                    ${achievement.title}
+                </h3>
+
+                <p>
+                    ${achievement.description}
+                </p>
+
+                <div class="achievement-status">
+                    ${
+                        unlocked
+                        ? "✅ TERBUKA"
+                        : "🔒 BELUM TERBUKA"
+                    }
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
+
+        }
+    );
+
+
+    document.getElementById(
+        "achievementProgress"
+    ).textContent =
+        unlockedCount +
+        " dari 6 prestasi terbuka";
+
+
+    document.getElementById(
+        "achievementProgressBar"
+    ).style.width =
+        (
+            unlockedCount / 6 * 100
+        ) + "%";
+
+}
+
+
+/* =====================================================
+   CONTINUE
+===================================================== */
+
+function continueAdventure(){
+
+    const unlocked =
+        getUnlockedLevel();
+
+    const completed =
+        getCompletedLevels();
+
+
+    if(
+        completed.length === 3
+    ){
+
+        showCertificate();
+
+        return;
+
+    }
+
+
+    for(let i=1;i<=3;i++){
+
+        if(
+            unlocked >= i &&
+            !completed.includes(i)
+        ){
+
+            startLevel(i);
+
+            return;
+
+        }
+
+    }
+
+
+    backToHome();
+
+}
+
+
+/* =====================================================
+   BACK HOME
+===================================================== */
+
+function backToHome(){
+
+    document.getElementById("gameScreen")
+        .classList.add("hidden");
+
+    document.getElementById("resultScreen")
+        .classList.add("hidden");
+
+    document.getElementById("achievementScreen")
+        .classList.add("hidden");
+
+    document.getElementById("certificateScreen")
+        .classList.add("hidden");
+
+    document.getElementById("homeScreen")
+        .classList.remove("hidden");
+
+
+    updateHome();
+
+}
+
+
+/* =====================================================
    CERTIFICATE
-=================================== */
+===================================================== */
 
 function showCertificate(){
 
-document.getElementById("result")
-.classList.add("hidden");
-
-document.getElementById("certificate")
-.classList.remove("hidden");
+    const completed =
+        getCompletedLevels();
 
 
-document.getElementById("certificateName")
-.innerText=
-studentName;
+    if(
+        completed.length < 3
+    ){
+
+        showToast(
+            "🎓 Sertifikat tersedia setelah semua level selesai."
+        );
+
+        return;
+
+    }
 
 
-document.getElementById("certificateXP")
-.innerText=
-completedLevels.length*80+
-" XP";
+    const name =
+        localStorage.getItem(
+            "studentName"
+        ) || "Santri";
 
 
-document.getElementById("certificateAccuracy")
-.innerText=
-"Minimal 70% setiap level";
+    const achievements =
+        getAchievements();
+
+
+    const achievementCount =
+        Object.values(achievements)
+        .filter(Boolean)
+        .length;
+
+
+    document.getElementById(
+        "certificateName"
+    ).textContent = name;
+
+
+    document.getElementById(
+        "certificateXP"
+    ).textContent =
+        getTotalXP();
+
+
+    document.getElementById(
+        "certificateAchievement"
+    ).textContent =
+        achievementCount + "/6";
+
+
+    document.getElementById("homeScreen")
+        .classList.add("hidden");
+
+    document.getElementById("resultScreen")
+        .classList.add("hidden");
+
+    document.getElementById("gameScreen")
+        .classList.add("hidden");
+
+    document.getElementById("achievementScreen")
+        .classList.add("hidden");
+
+    document.getElementById("certificateScreen")
+        .classList.remove("hidden");
 
 }
 
 
-/* ===================================
-   BACK HOME
-=================================== */
-
-function backHome(){
-
-document.getElementById("result")
-.classList.add("hidden");
-
-document.getElementById("certificate")
-.classList.add("hidden");
-
-document.getElementById("gameScreen")
-.classList.add("hidden");
-
-document.getElementById("home")
-.classList.remove("hidden");
-
-
-document.getElementById("studentName")
-.value=
-studentName;
-
-
-updateHome();
-
-}
-
-
-/* ===================================
+/* =====================================================
    RESET
-=================================== */
+===================================================== */
 
 function resetProgress(){
 
-const yakin=
-confirm(
-"Yakin ingin menghapus progress game?"
-);
-
-if(!yakin)return;
+    const confirmReset =
+        confirm(
+            "Yakin ingin menghapus semua progress, XP, prestasi dan nama santri?"
+        );
 
 
-localStorage.removeItem(
-"tajwidUnlocked"
-);
-
-localStorage.removeItem(
-"tajwidCompleted"
-);
-
-localStorage.removeItem(
-"studentName"
-);
+    if(!confirmReset) return;
 
 
-unlockedLevel=1;
+    localStorage.removeItem(
+        "studentName"
+    );
 
-completedLevels=[];
+    localStorage.removeItem(
+        "tajwidUnlocked"
+    );
 
-studentName="";
+    localStorage.removeItem(
+        "tajwidCompleted"
+    );
+
+    localStorage.removeItem(
+        "tajwidAchievements"
+    );
+
+    localStorage.removeItem(
+        "tajwidTotalXP"
+    );
 
 
-document.getElementById("studentName")
-.value="";
-
-
-location.reload();
+    location.reload();
 
 }
 
 
-/* ===================================
-   LOAD
-=================================== */
+/* =====================================================
+   TOAST
+===================================================== */
 
-document.getElementById("studentName")
-.value=
-studentName;
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
 
 
-updateHome();
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    setTimeout(() => {
+
+        toast.classList.remove(
+            "show"
+        );
+
+    },2500);
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+initialize();
 
 </script>
 
 </body>
-
 </html>
-```
