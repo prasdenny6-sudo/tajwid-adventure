@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tajwid Adventure</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f5132, #198754);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game {
+    width: 95%;
+    max-width: 600px;
+    background: white;
+    color: #222;
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+}
+
+.logo {
+    text-align: center;
+    font-size: 45px;
+}
+
+h1 {
+    text-align: center;
+    color: #0f5132;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    background: #f1f8f4;
+    padding: 12px;
+    border-radius: 15px;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.level {
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.arabic {
+    font-size: 42px;
+    text-align: center;
+    direction: rtl;
+    margin: 25px 0;
+    line-height: 1.8;
+}
+
+.question {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.answers {
+    display: grid;
+    gap: 12px;
+}
+
+button {
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.answer {
+    background: #f1f3f5;
+    color: #222;
+}
+
+.answer:hover {
+    background: #d8f3dc;
+}
+
+.correct {
+    background: #198754 !important;
+    color: white !important;
+}
+
+.wrong {
+    background: #dc3545 !important;
+    color: white !important;
+}
+
+.main-btn {
+    width: 100%;
+    background: #198754;
+    color: white;
+    margin-top: 15px;
+}
+
+.feedback {
+    text-align: center;
+    min-height: 50px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+.result {
+    text-align: center;
+}
+
+.badge {
+    font-size: 70px;
+}
+
+.progress {
+    height: 10px;
+    background: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #198754;
+    width: 0%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+<div id="home">
+
+<div class="logo">📖🎮</div>
+
+<h1>Tajwid Adventure</h1>
+
+<p class="subtitle">
+Belajar Tajwid, Naik Level, Lancar Membaca Al-Qur'an
+</p>
+
+<div class="stats">
+<span>⭐ XP: <span id="homeXP">0</span></span>
+<span>🏆 Level: <span id="homeLevel">1</span></span>
+</div>
+
+<button class="main-btn" onclick="startGame()">
+🚀 MULAI PETUALANGAN
+</button>
+
+</div>
+
+
+<div id="gameScreen" class="hidden">
+
+<div class="stats">
+<span>⭐ <span id="xp">0</span> XP</span>
+<span>❤️ <span id="lives">3</span></span>
+</div>
+
+<div class="level">
+<b id="levelName"></b>
+<br>
+<small id="questionNumber"></small>
+</div>
+
+<div class="progress">
+<div class="progress-bar" id="progress"></div>
+</div>
+
+<div class="arabic" id="arabic"></div>
+
+<div class="question" id="question"></div>
+
+<div class="answers" id="answers"></div>
+
+<div class="feedback" id="feedback"></div>
+
+<button class="main-btn hidden" id="nextButton" onclick="nextQuestion()">
+SOAL BERIKUTNYA →
+</button>
+
+</div>
+
+
+<div id="result" class="hidden result">
+
+<div class="badge">🏆</div>
+
+<h1>Level Selesai!</h1>
+
+<p id="resultText"></p>
+
+<h2>⭐ <span id="resultXP"></span> XP</h2>
+
+<button class="main-btn" onclick="startGame()">
+🔄 MAIN LAGI
+</button>
+
+<button class="main-btn" onclick="location.reload()">
+🏠 MENU UTAMA
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+const questions = [
+
+{
+arabic:"مِنْ بَعْدِ",
+focus:"نْ ب",
+answer:"Iqlab",
+explanation:"Nun sukun bertemu huruf ب, maka hukumnya Iqlab."
+},
+
+{
+arabic:"مَنْ يَقُولُ",
+focus:"نْ ي",
+answer:"Idgham Bighunnah",
+explanation:"Nun sukun bertemu ي, maka hukumnya Idgham Bighunnah."
+},
+
+{
+arabic:"مِنْ رَبِّهِمْ",
+focus:"نْ ر",
+answer:"Idgham Bilaghunnah",
+explanation:"Nun sukun bertemu ر, maka hukumnya Idgham Bilaghunnah."
+},
+
+{
+arabic:"مِنْ هَادٍ",
+focus:"نْ ه",
+answer:"Izhar Halqi",
+explanation:"Nun sukun bertemu ه, maka hukumnya Izhar Halqi."
+},
+
+{
+arabic:"مِنْ شَرِّ",
+focus:"نْ ش",
+answer:"Ikhfa",
+explanation:"Nun sukun bertemu ش, maka hukumnya Ikhfa."
+},
+
+{
+arabic:"تَرْمِيهِمْ بِحِجَارَةٍ",
+focus:"مْ ب",
+answer:"Ikhfa Syafawi",
+explanation:"Mim sukun bertemu ب, maka hukumnya Ikhfa Syafawi."
+},
+
+{
+arabic:"لَهُمْ مَا",
+focus:"مْ م",
+answer:"Idgham Mimi",
+explanation:"Mim sukun bertemu mim, maka hukumnya Idgham Mimi."
+},
+
+{
+arabic:"عَلَيْهِمْ غَيْرِ",
+focus:"مْ غ",
+answer:"Izhar Syafawi",
+explanation:"Mim sukun bertemu غ, maka hukumnya Izhar Syafawi."
+},
+
+{
+arabic:"قَالَ",
+focus:"قَا",
+answer:"Mad Thabi'i",
+explanation:"Alif didahului fathah dan dibaca panjang dua harakat."
+},
+
+{
+arabic:"قِيلَ",
+focus:"قِي",
+answer:"Mad Thabi'i",
+explanation:"Ya sukun didahului kasrah dan dibaca panjang dua harakat."
+}
+
+];
+
+
+const answerPool = [
+"Iqlab",
+"Idgham Bighunnah",
+"Idgham Bilaghunnah",
+"Izhar Halqi",
+"Ikhfa",
+"Ikhfa Syafawi",
+"Idgham Mimi",
+"Izhar Syafawi",
+"Mad Thabi'i"
+];
+
+
+let current = 0;
+let xp = 0;
+let lives = 3;
+let correct = 0;
+let answered = false;
+
+
+function startGame(){
+
+current = 0;
+xp = 0;
+lives = 3;
+correct = 0;
+
+document.getElementById("home").classList.add("hidden");
+
+document.getElementById("result").classList.add("hidden");
+
+document.getElementById("gameScreen").classList.remove("hidden");
+
+showQuestion();
+
+}
+
+
+function showQuestion(){
+
+answered = false;
+
+const q = questions[current];
+
+document.getElementById("xp").innerText = xp;
+
+document.getElementById("lives").innerText = lives;
+
+document.getElementById("levelName").innerText =
+"Level 1 — Nun Sukun, Mim Sukun & Mad";
+
+document.getElementById("questionNumber").innerText =
+"Soal " + (current + 1) + " dari " + questions.length;
+
+document.getElementById("progress").style.width =
+((current + 1) / questions.length * 100) + "%";
+
+document.getElementById("arabic").innerText =
+q.arabic;
+
+document.getElementById("question").innerHTML =
+"Apa hukum tajwid pada bagian <b>" + q.focus + "</b>?";
+
+document.getElementById("feedback").innerText = "";
+
+document.getElementById("nextButton").classList.add("hidden");
+
+
+let options = [q.answer];
+
+let shuffled = answerPool
+.filter(x => x !== q.answer)
+.sort(() => Math.random() - 0.5);
+
+options = options.concat(shuffled.slice(0,3));
+
+options.sort(() => Math.random() - 0.5);
+
+
+const answerBox = document.getElementById("answers");
+
+answerBox.innerHTML = "";
+
+
+options.forEach(option => {
+
+const button = document.createElement("button");
+
+button.innerText = option;
+
+button.className = "answer";
+
+button.onclick = function(){
+
+checkAnswer(button, option);
+
+};
+
+answerBox.appendChild(button);
+
+});
+
+}
+
+
+function checkAnswer(button, answer){
+
+if(answered) return;
+
+answered = true;
+
+const q = questions[current];
+
+const buttons =
+document.querySelectorAll(".answer");
+
+buttons.forEach(btn => btn.disabled = true);
+
+
+if(answer === q.answer){
+
+button.classList.add("correct");
+
+xp += 10;
+
+correct++;
+
+document.getElementById("feedback").innerHTML =
+"✅ BENAR!<br>" + q.explanation;
+
+}else{
+
+button.classList.add("wrong");
+
+lives--;
+
+buttons.forEach(btn => {
+
+if(btn.innerText === q.answer){
+
+btn.classList.add("correct");
+
+}
+
+});
+
+document.getElementById("feedback").innerHTML =
+"❌ BELUM TEPAT!<br>" + q.explanation;
+
+}
+
+
+document.getElementById("xp").innerText = xp;
+
+document.getElementById("lives").innerText = lives;
+
+document.getElementById("nextButton").classList.remove("hidden");
+
+}
+
+
+function nextQuestion(){
+
+if(lives <= 0 || current >= questions.length - 1){
+
+showResult();
+
+return;
+
+}
+
+current++;
+
+showQuestion();
+
+}
+
+
+function showResult(){
+
+document.getElementById("gameScreen").classList.add("hidden");
+
+document.getElementById("result").classList.remove("hidden");
+
+let accuracy =
+Math.round((correct / questions.length) * 100);
+
+document.getElementById("resultText").innerText =
+"Kamu menjawab " + correct +
+" dari " + questions.length +
+" soal dengan benar. Akurasi: " +
+accuracy + "%";
+
+document.getElementById("resultXP").innerText = xp;
+
+}
+
+
+</script>
+
+</body>
+</html>
